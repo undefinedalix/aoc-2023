@@ -51,7 +51,6 @@ class Game {
 	Count _blues;
 	public:
 	  Game(const std::string& description) : _reds(0u), _greens(0u), _blues(0u) {
-			std::cout << "Parsing game: " << description << "\n";
 			size_t start = 0u;
 			size_t end = description.find(';');
 			while (end != description.npos) {
@@ -90,7 +89,6 @@ ID parseLine(const std::string& line) {
 	size_t pos = line.find(":");
 	auto identifier = line.substr(0, pos);
 	Game game(line.substr(pos+1));
-	std::cout << identifier << " -> " << game << "\n";
 	if (game.red() <= 12 && game.blue() <= 14 && game.green() <= 13) {
 		std::stringstream stream(identifier);
 		std::string ignore;
