@@ -76,6 +76,9 @@ class Game {
 		Count blue() const {
 			return _blues;
 		}
+		unsigned int power() const {
+			return _reds * _greens * _blues;
+		}
 		friend std::ostream& operator<<(std::ostream& stream, const Game& game) {
 			stream << game._reds << "R, " << game._greens << "G, " << game._blues << "B";
 			return stream;
@@ -98,6 +101,12 @@ ID parseLine(const std::string& line) {
 	return 0u;
 }
 
+unsigned parsePower(const std::string& line) {
+	size_t pos = line.find(":");
+	Game game(line.substr(pos+1));
+	return game.power();
+}
+
 int main() {
 	const char *inputPath{"resources/input_02.txt"};
 
@@ -108,8 +117,11 @@ int main() {
 	}
 
 	Count sum = 0u;
+	unsigned int power = 0u;
 	for (std::string line; std::getline(file, line);) {
 		sum += parseLine(line);
+		power += parsePower(line);
 	}
 	std::cout << "sum: " << sum << "\n";
+	std::cout << "power: " << power << "\n";
 }
